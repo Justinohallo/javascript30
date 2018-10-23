@@ -7,7 +7,8 @@
 </head>
 <body>
 
-
+<!-- Data-'' is a way to add a custom attribute to an element. All you need to do is
+include the custom value after data- .  -->
   <div class="keys">
     <div data-key="65" class="key">
       <kbd>A</kbd>
@@ -61,12 +62,19 @@
 
 
 function playSound(e){
+    // This function receives an event from the add event listener. This event 
+    // is the response from the event listener (click, key up etc..)
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
+    // Using template literals allows you to pass in dynamic data into the query selector. 
+    //audio[data-key] is how you access the paramaters of the element. 
+    
     const key = document.querySelector(`key[data-key="${e.keyCode}"]`)
     if (!audio){return}
     audio.currentTime = 0
+    // audio.currentTime will restart the currently playing audio. 
     audio.play()
     key.classList.add('playing')
+    // classList.add will add the class of playing to the element. 
 }
 
 
@@ -78,8 +86,9 @@ this.classList.remove('playing')
 }
 
 const keys = document.querySelectorAll('.key')
+// this will return an array, of all the elements containing the class of key. 
 keys.forEach(key => key.addEventListener('transitionend', removeTransition))
-
+// this will loop through each item in the array, and add an event listener of 'transitioned'
 window.addEventListener('keydown', playSound)
 
 </script>
